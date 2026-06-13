@@ -185,12 +185,13 @@ def row_to_dict(row):
 # Serve frontend
 @app.route('/')
 def index():
+    return send_from_directory('.', 'index.html')
     return send_from_directory('../frontend', 'index.html')
 
 
 @app.route('/admin')
 def admin():
-    return send_from_directory('../frontend', 'admin.html')
+    return send_from_directory('.', 'admin.html')
 
 
 # ── Products ──────────────────────────────────────────────────────────────────
