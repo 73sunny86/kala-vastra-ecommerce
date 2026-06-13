@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 
 # ─── App Setup ────────────────────────────────────────────────────────────────
-app = Flask(__name__, static_folder='../frontend', static_url_path='')
+app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app)  # Allow all origins (for dev; restrict in production)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -186,7 +186,7 @@ def row_to_dict(row):
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
-    return send_from_directory('../frontend', 'index.html')
+    return send_from_directory('.', 'index.html')
 
 
 @app.route('/admin')
