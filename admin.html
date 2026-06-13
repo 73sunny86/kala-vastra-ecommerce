@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kala Vastra — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sb">
+  <div class="sb-logo"><h2><span>Kala</span> Vastra</h2><small>Admin Panel</small></div>
+  <nav class="sb-nav">
+    <div class="sb-section">Overview</div>
+    <div class="nav-i active" id="nav-dashboard" onclick="goPage('dashboard')"><span class="ic">📊</span>Dashboard</div>
+    <div class="nav-i" id="nav-analytics" onclick="goPage('analytics')"><span class="ic">📈</span>Analytics</div>
+    <div class="sb-section">Catalog</div>
+    <div class="nav-i" id="nav-products" onclick="goPage('products')"><span class="ic">👗</span>Products</div>
+    <div class="nav-i" id="nav-inventory" onclick="goPage('inventory')"><span class="ic">📦</span>Inventory</div>
+    <div class="sb-section">Sales</div>
+    <div class="nav-i" id="nav-orders" onclick="goPage('orders')"><span class="ic">🛍️</span>Orders</div>
+    <div class="nav-i" id="nav-coupons" onclick="goPage('coupons')"><span class="ic">🎟️</span>Coupons</div>
+    <div class="sb-section">Marketing</div>
+    <div class="nav-i" id="nav-subscribers" onclick="goPage('subscribers')"><span class="ic">📧</span>Subscribers</div>
+  </nav>
+  <div class="sb-foot"><a href="/">← Back to Store</a></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <h1 id="topbar-title">Dashboard</h1>
+    <div class="topbar-right">
+      <small id="topbar-time"></small>
+      <button class="btn btn-gold" onclick="goPage(currentPage)">↻ Refresh</button>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- ═══ DASHBOARD ═══ -->
+    <div class="page active" id="page-dashboard">
+      <div id="low-stock-alert"></div>
+      <div class="stat-grid" id="stat-grid"><div class="loading"><div class="spinner"></div><p>Loading…</p></div></div>
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head"><h2>Recent Orders</h2><button class="btn btn-outline btn-sm" onclick="goPage('orders')">View All</button></div>
+          <div class="panel-body" id="recent-orders"><div class="loading">Loading…</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Quick Actions</h2></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:10px">
+            <button class="btn btn-gold" onclick="goPage('products');setTimeout(openAddModal,200)">+ Add New Product</button>
+            <button class="btn btn-outline" onclick="goPage('inventory')">📦 Manage Stock</button>
+            <button class="btn btn-outline" onclick="goPage('orders')">🛍️ View All Orders</button>
+            <button class="btn btn-outline" onclick="goPage('coupons')">🎟️ Create Coupon</button>
+            <button class="btn btn-outline" onclick="goPage('analytics')">📈 View Analytics</button>
+            <hr style="border:none;border-top:1px solid #eee"/>
+            <a href="https://wa.me/919876543210" target="_blank" class="btn btn-green">💬 Open WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ANALYTICS ═══ -->
+    <div class="page" id="page-analytics">
+      <div id="analytics-body"><div class="loading"><div class="spinner"></div><p>Loading…</p></div></div>
+    </div>
+
+    <!-- ═══ PRODUCTS ═══ -->
+    <div class="page" id="page-products">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>All Products</h2>
+          <div class="ph-right">
+            <div class="search-bar"><input type="search" placeholder="Search products…" oninput="loadProducts(this.value)"/></div>
+            <select class="status-sel" onchange="loadProducts('',this.value)">
+              <option value="">All Categories</option>
+              <option value="saree">Sarees</option>
+              <option value="kurti">Kurtis</option>
+              <option value="mens_shirt">Men's Shirts</option>
+            </select>
+            <button class="btn btn-gold" onclick="openAddModal()">+ Add Product</button>
+          </div>
+        </div>
+        <div id="products-body"><div class="loading"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+    </div>
+
+    <!-- ═══ INVENTORY ═══ -->
+    <div class="page" id="page-inventory">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Stock Management</h2>
+          <button class="btn btn-gold" onclick="loadInventory()">↻ Refresh</button>
+        </div>
+        <div id="inventory-body"><div class="loading"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+    </div>
+
+    <!-- ═══ ORDERS ═══ -->
+    <div class="page" id="page-orders">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>All Orders</h2>
+          <div class="ph-right">
+            <div class="search-bar"><input type="search" id="order-search" placeholder="Name or phone…" oninput="filterOrders()"/></div>
+            <select class="status-sel" id="order-status-filter" onchange="filterOrders()">
+              <option value="">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="in_progress">In Progress</option>
+              <option value="dispatched">Dispatched</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button class="btn btn-gold" onclick="loadOrders()">↻ Refresh</button>
+          </div>
+        </div>
+        <div id="orders-body"><div class="loading"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+    </div>
+
+    <!-- ═══ COUPONS ═══ -->
+    <div class="page" id="page-coupons">
+      <div class="panel" style="margin-bottom:20px">
+        <div class="panel-head"><h2>Create Coupon</h2></div>
+        <div class="panel-body">
+          <form id="coupon-form" onsubmit="event.preventDefault();addCoupon()">
+            <div class="form-grid g3" style="margin-bottom:14px">
+              <div class="fg"><label>Coupon Code *</label><input id="cp-code" placeholder="e.g. SAVE20" style="text-transform:uppercase" required/></div>
+              <div class="fg"><label>Discount % *</label><input id="cp-disc" type="number" min="1" max="90" placeholder="20" required/></div>
+              <div class="fg"><label>Min Order (₹)</label><input id="cp-min" type="number" min="0" placeholder="0"/></div>
+              <div class="fg"><label>Max Uses</label><input id="cp-max" type="number" min="1" value="100"/></div>
+            </div>
+            <button type="submit" class="btn btn-gold">+ Create Coupon</button>
+          </form>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Active Coupons</h2><button class="btn btn-outline btn-sm" onclick="loadCoupons()">↻ Refresh</button></div>
+        <div id="coupons-body"><div class="loading"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SUBSCRIBERS ═══ -->
+    <div class="page" id="page-subscribers">
+      <div class="panel">
+        <div class="panel-head"><h2>Newsletter Subscribers</h2><button class="btn btn-gold btn-sm" onclick="loadSubscribers()">↻ Refresh</button></div>
+        <div id="subs-body"><div class="loading"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- ═══ ADD/EDIT PRODUCT MODAL ═══ -->
+<div class="modal-bg" id="prod-modal" onclick="if(event.target===this)closeModal('prod-modal')">
+  <div class="modal">
+    <h3 id="prod-modal-title">Add Product</h3>
+    <input type="hidden" id="prod-id"/>
+    <div class="form-grid" style="margin-bottom:14px">
+      <div class="fg full"><label>Product Name *</label><input id="prod-name" placeholder="e.g. Peacock Silk Saree" required/></div>
+      <div class="fg"><label>Category *</label>
+        <select id="prod-cat">
+          <option value="saree">Saree</option>
+          <option value="kurti">Kurti</option>
+          <option value="mens_shirt">Men's Shirt</option>
+        </select>
+      </div>
+      <div class="fg"><label>Price (₹) *</label><input id="prod-price" type="number" min="0" placeholder="2500" required/></div>
+      <div class="fg"><label>Stock Quantity</label><input id="prod-stock" type="number" min="0" placeholder="50"/></div>
+      <div class="fg"><label>Badge</label><input id="prod-badge" placeholder="e.g. Bestseller, New, Artisan"/></div>
+      <div class="fg full"><label>Image URL *</label><input id="prod-img" placeholder="https://i.pinimg.com/…" required/></div>
+      <div class="fg full"><label>Description</label><textarea id="prod-desc" rows="3" placeholder="Describe the product…"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal('prod-modal')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveProduct()">Save Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

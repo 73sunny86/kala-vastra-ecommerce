@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KALA VASTRA – Handcrafted Indian Wear</title>
+  <meta name="description" content="Shop handcrafted, customized Indian ethnic wear – sarees, kurtis, and fabric-painted shirts for men. Made to order with love."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ─── CART SIDEBAR ─────────────────────────────────────────────────── -->
+<div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+<aside id="cart-sidebar" class="cart-sidebar">
+  <div class="cart-head">
+    <h3>Your Bag <span id="cart-count">0</span></h3>
+    <button onclick="toggleCart()" class="cart-close" aria-label="Close cart">✕</button>
+  </div>
+  <div id="cart-items" class="cart-items"><p class="cart-empty">Your bag is empty.</p></div>
+  <div class="cart-foot">
+    <div class="cart-total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+    <a id="whatsapp-checkout" href="#" class="btn-primary full" target="_blank">
+      Checkout via WhatsApp 💬
+    </a>
+  </div>
+</aside>
+
+<!-- ─── MOBILE NAV OVERLAY ──────────────────────────────────────────── -->
+<div id="nav-overlay" class="nav-overlay" onclick="closeNav()"></div>
+
+<!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#"><span>Kala</span> Vastra</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#categories" onclick="closeNav()">Collections</a></li>
+    <li><a href="#womens" onclick="closeNav()">Women</a></li>
+    <li><a href="#mens" onclick="closeNav()">Men</a></li>
+    <li><a href="#custom" onclick="closeNav()">How It Works</a></li>
+    <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="icon-btn" onclick="toggleCart()" title="Cart" id="cart-btn">
+      🛒 <span class="cart-badge" id="nav-badge">0</span>
+    </button>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Order Now</button>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">✦ Handcrafted &amp; Customized Indian Wear</div>
+    <h1>Wear the <em>Art</em><br/>of India</h1>
+    <p>From hand-painted sarees to embroidered kurtis — every piece at Kala Vastra is crafted with love, color, and tradition. Made-to-order, made for you.</p>
+    <div class="hero-btns">
+      <a href="#categories" class="btn-primary">Explore Collection</a>
+      <a href="#contact" class="btn-outline">Order Custom</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>500+</strong><span>Happy Customers</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><strong>100%</strong><span>Handcrafted</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><strong>10–14</strong><span>Days Delivery</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=900&q=80" alt="Indian woman in beautiful saree"/>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ──────────────────────────────────────────────────────── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee">
+    <span>Handcrafted Sarees</span><span>Fabric Painted Shirts</span><span>Customized Kurtis</span>
+    <span>Made to Order</span><span>Block Print Dupattas</span><span>Artisan Crafted</span>
+    <span>Handcrafted Sarees</span><span>Fabric Painted Shirts</span><span>Customized Kurtis</span>
+    <span>Made to Order</span><span>Block Print Dupattas</span><span>Artisan Crafted</span>
+  </div>
+</div>
+
+<!-- ─── CATEGORIES ───────────────────────────────────────────────────── -->
+<section class="categories" id="categories">
+  <div class="section-header">
+    <span class="section-tag">Shop by Category</span>
+    <h2>Our <em>Collections</em></h2>
+    <p>Each category is a world of its own — explore and find your style.</p>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="filterAndScroll('saree')" role="button" tabindex="0" aria-label="Browse Sarees">
+      <img src="https://i.pinimg.com/736x/2d/5f/1d/2d5f1d1c2cee71cd1d6174f3c1b73dad.jpg" alt="Sarees collection"/>
+      <div class="cat-overlay">
+        <div class="cat-label">Sarees</div>
+        <div class="cat-sub">Silk · Chiffon · Cotton · Hand-painted</div>
+      </div>
+      <div class="cat-badge">Bestseller</div>
+    </div>
+    <div class="cat-card" onclick="filterAndScroll('kurti')" role="button" tabindex="0" aria-label="Browse Kurtis">
+      <img src="https://i.pinimg.com/736x/fa/88/cb/fa88cb4a8906246b645f3365f508c82a.jpg" alt="Kurtis collection"/>
+      <div class="cat-overlay">
+        <div class="cat-label">Kurtis</div>
+        <div class="cat-sub">Anarkali · Straight · A-line</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="document.getElementById('mens').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0" aria-label="Browse Men's Painted Shirts">
+      <img src="https://i.pinimg.com/736x/1b/13/4f/1b134fbdd190ab80f181114be41a0f63.jpg" alt="Men's hand-painted shirts"/>
+      <div class="cat-overlay">
+        <div class="cat-label">Men's Painted Shirts</div>
+        <div class="cat-sub">Hand-painted · Custom · One-of-a-kind</div>
+      </div>
+      <div class="cat-badge">Artisan</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ─── FEATURED ──────────────────────────────────────────────────────── -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="featured-img-wrap">
+      <img src="https://i.pinimg.com/736x/2d/5f/1d/2d5f1d1c2cee71cd1d6174f3c1b73dad.jpg" alt="Featured Peacock Saree"/>
+      <div class="featured-ribbon">⭐ Featured</div>
+    </div>
+    <div class="featured-info">
+      <span class="section-tag">✦ Featured Piece</span>
+      <h2>Peacock Hand-Painted Silk Saree</h2>
+      <p>Inspired by the vibrant flora of Rajasthan, this hand-painted silk saree is a wearable canvas. Every motif is hand-drawn with fabric-safe pigments that breathe life into pure Kanjivaram silk.</p>
+      <p>Available in custom colors, custom blouse stitching, and made-to-order within 10–14 days.</p>
+      <div class="price-row">
+        <span class="price">₹4,800</span>
+        <span class="price-tag">Customizable</span>
+      </div>
+      <div class="tags">
+        <span class="tag">100% Silk</span>
+        <span class="tag">Hand-painted</span>
+        <span class="tag">Custom Colors</span>
+        <span class="tag">Includes Blouse Piece</span>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="addToCartById(1)">Add to Bag</button>
+        <a href="#contact" class="btn-outline">Customize ✦</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WOMEN'S PRODUCTS ─────────────────────────────────────────────── -->
+<section class="products" id="womens">
+  <div class="section-header">
+    <span class="section-tag">For Women</span>
+    <h2>Curated <em>Women's Wear</em></h2>
+    <p>Every piece is customizable — choose your fabric, color, and design.</p>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filter-tabs" id="filter-tabs">
+    <button class="filter-btn active" data-filter="all" onclick="filterProducts('all')">All</button>
+    <button class="filter-btn" data-filter="saree" onclick="filterProducts('saree')">Sarees</button>
+    <button class="filter-btn" data-filter="kurti" onclick="filterProducts('kurti')">Kurtis</button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <input type="search" id="product-search" placeholder="Search products…" oninput="handleSearch(this.value)"/>
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <div class="product-grid" id="women-grid">
+    <!-- Populated by JS via API -->
+    <div class="loading-placeholder">
+      <div class="spinner"></div>
+      <p>Loading products…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MEN'S SECTION ─────────────────────────────────────────────────── -->
+<section class="mens" id="mens">
+  <div class="section-header">
+    <span class="section-tag" style="color:var(--gold-light);">For Men</span>
+    <h2>Fabric <em style="color:var(--gold-light);">Painted Shirts</em></h2>
+    <p>Wearable art for the modern man — each shirt is hand-painted, one-of-a-kind.</p>
+  </div>
+  <div class="mens-grid" id="mens-grid">
+    <!-- Populated by JS via API -->
+    <div class="loading-placeholder" style="color:#fff;grid-column:1/-1;">
+      <div class="spinner" style="border-color:rgba(255,255,255,0.2);border-top-color:var(--gold-light);"></div>
+      <p>Loading products…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ──────────────────────────────────────────────────── -->
+<section class="process" id="custom">
+  <div class="section-header">
+    <span class="section-tag">How It Works</span>
+    <h2>Your <em>Custom Order</em> Journey</h2>
+    <p>From idea to doorstep in just a few simple steps.</p>
+  </div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Choose Your Base</h3>
+      <p>Pick from saree, kurti, or shirt. Select fabric and size.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Pick Your Design</h3>
+      <p>Share your color palette, theme, or reference images with our artists.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>We Paint It</h3>
+      <p>Our artisans hand-paint your design. We share a preview before dispatch.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Doorstep Delivery</h3>
+      <p>Carefully packed and delivered within 10–14 days across India.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────────────────────────── -->
+<section class="testimonials">
+  <div class="section-header">
+    <span class="section-tag">Customer Love</span>
+    <h2>What Our <em>Customers Say</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>I ordered a custom peacock saree for my wedding and it was absolutely breathtaking. The colors were so vibrant and the painting was immaculate. Everyone at the ceremony was asking where I got it!</p>
+      <div class="testi-author">Priya Rajan</div>
+      <div class="testi-loc">Chennai, Tamil Nadu</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>My husband got a custom fabric-painted shirt as a birthday gift and he absolutely loves it. The abstract design they created from our rough idea was better than we imagined. Super quick delivery!</p>
+      <div class="testi-author">Sneha Mehta</div>
+      <div class="testi-loc">Ahmedabad, Gujarat</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>The quality of the kurti I ordered is outstanding. The fabric painting is so detailed and the colors haven't faded even after multiple washes. Truly a unique piece you can't find anywhere else.</p>
+      <div class="testi-author">Lakshmi Iyer</div>
+      <div class="testi-loc">Hyderabad, Telangana</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT / ORDER FORM ──────────────────────────────────────────── -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <span class="section-tag">Get in Touch</span>
+      <h2>Place a <em>Custom Order</em></h2>
+      <p>Fill the form or reach us directly. Our artisans will get back within 24 hours.</p>
+      <div class="contact-links">
+        <a href="https://wa.me/919876543210" target="_blank" class="contact-link" rel="noopener">
+          <span class="clink-icon">💬</span>
+          <div><strong>WhatsApp</strong><small>+91 98765 43210</small></div>
+        </a>
+        <a href="mailto:hello@kalavastra.in" class="contact-link">
+          <span class="clink-icon">✉️</span>
+          <div><strong>Email</strong><small>hello@kalavastra.in</small></div>
+        </a>
+        <a href="#" class="contact-link">
+          <span class="clink-icon">📸</span>
+          <div><strong>Instagram</strong><small>@kalavastra</small></div>
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" id="order-form" onsubmit="submitOrder(event)">
+      <h3>Request a Custom Piece</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">Your Name *</label>
+          <input type="text" id="f-name" placeholder="e.g. Priya Sharma" required/>
+        </div>
+        <div class="form-group">
+          <label for="f-phone">Phone / WhatsApp *</label>
+          <input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX" required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="f-email">Email Address</label>
+        <input type="email" id="f-email" placeholder="priya@email.com"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-type">Product Type</label>
+          <select id="f-type">
+            <option value="Saree">Saree</option>
+            <option value="Kurti">Kurti</option>
+            <option value="Top / Tunic">Top / Tunic</option>
+            <option value="Dupatta">Dupatta</option>
+            <option value="Men's Shirt">Men's Shirt</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-budget">Budget (approx.)</label>
+          <select id="f-budget">
+            <option value="Under ₹1,000">Under ₹1,000</option>
+            <option value="₹1,000 – ₹2,500">₹1,000 – ₹2,500</option>
+            <option value="₹2,500 – ₹5,000" selected>₹2,500 – ₹5,000</option>
+            <option value="₹5,000+">₹5,000+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="f-desc">Describe Your Design</label>
+        <textarea id="f-desc" rows="4" placeholder="Colors, motifs, occasion, any reference images…"></textarea>
+      </div>
+      <button type="submit" class="btn-primary full" id="form-submit-btn">Send My Request ✦</button>
+      <div id="form-success" class="form-success" style="display:none;">
+        ✅ Thank you! We'll contact you within 24 hours.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ─── NEWSLETTER ────────────────────────────────────────────────────── -->
+<div class="newsletter-banner">
+  <div class="newsletter-inner">
+    <div>
+      <h3>Stay in the <em>Loop</em></h3>
+      <p>New collections, artisan stories &amp; exclusive offers — straight to your inbox.</p>
+    </div>
+    <form class="nl-form" id="nl-form" onsubmit="subscribeNewsletter(event)">
+      <input type="email" id="nl-email" placeholder="your@email.com" required/>
+      <button type="submit" class="btn-primary">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Kala Vastra</h3>
+      <p>Handcrafted, customized Indian clothing for women and men. Every piece is painted with love by skilled artisans across India.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+        <a href="#" aria-label="Pinterest">Pinterest</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Women's</h4>
+      <ul>
+        <li><a href="#womens" onclick="filterProducts('saree')">Sarees</a></li>
+        <li><a href="#womens" onclick="filterProducts('kurti')">Kurtis</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Men's</h4>
+      <ul>
+        <li><a href="#mens">Fabric Painted Shirts</a></li>
+        <li><a href="#contact">Custom Order</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#custom">How to Order</a></li>
+        <li><a href="#contact">Sizing Guide</a></li>
+        <li><a href="#contact">Care Instructions</a></li>
+        <li><a href="#contact">Shipping Info</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Kala Vastra. All rights reserved. Made with ♥ in India.</p>
+    <p style="font-size:0.75rem;color:rgba(255,255,255,0.2);">Crafted by artisans. Delivered with love.</p>
+  </div>
+</footer>
+
+<!-- ─── PRODUCT MODAL ─────────────────────────────────────────────────── -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
+<div id="product-modal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+  <button class="modal-close" onclick="closeModal()" aria-label="Close modal">✕</button>
+  <div class="modal-inner">
+    <div class="modal-img-wrap">
+      <img id="modal-img" src="" alt=""/>
+    </div>
+    <div class="modal-info">
+      <div id="modal-label" class="product-label"></div>
+      <h2 id="modal-name"></h2>
+      <div id="modal-price" class="price" style="margin:0.75rem 0;"></div>
+      <p id="modal-desc"></p>
+      <div id="modal-tags" class="tags" style="margin-top:1rem;"></div>
+      <div class="modal-size">
+        <label>Select Size</label>
+        <div class="size-btns">
+          <button class="size-btn active">XS</button>
+          <button class="size-btn">S</button>
+          <button class="size-btn">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
+        <button class="btn-primary" id="modal-add-btn">Add to Bag</button>
+        <a href="#contact" class="btn-outline" onclick="closeModal()">Customize This ✦</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TOAST ─────────────────────────────────────────────────────────── -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
