@@ -25,10 +25,6 @@ from db.database import init_db, get_db
 import json
 app = Flask(__name__)
 CORS(app)
-@app.route('/<path:filename>')
-def static_files(filename):
-    return send_from_directory('.', filename)
-CORS(app)
 
 # 
 # STATIC / FRONTEND
