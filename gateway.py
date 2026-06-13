@@ -23,10 +23,11 @@ from services import analytics_service   as analytics
 from services import coupon_service      as coupons
 from db.database import init_db, get_db
 import json
-
+app = Flask(__name__)
+CORS(app)
 @app.route('/<path:filename>')
 def static_files(filename):
-    return send_from_directory('../frontend', filename)
+    return send_from_directory('.', filename)
 CORS(app)
 
 # 
@@ -35,11 +36,11 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return send_from_directory('../frontend', 'index.html')
+    return send_from_directory('.', 'index.html')
 
 @app.route('/admin')
 def admin():
-    return send_from_directory('../frontend', 'admin.html')
+    return send_from_directory('.', 'admin.html')
 
 @app.route('/<path:filename>')
 def static_files(filename):
