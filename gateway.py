@@ -24,7 +24,9 @@ from services import coupon_service      as coupons
 from db.database import init_db, get_db
 import json
 
-app = Flask(__name__, static_folder='../frontend', static_url_path='')
+@app.route('/<path:filename>')
+def static_files(filename):
+    return send_from_directory('../frontend', filename)
 CORS(app)
 
 # 
@@ -38,6 +40,10 @@ def index():
 @app.route('/admin')
 def admin():
     return send_from_directory('../frontend', 'admin.html')
+
+@app.route('/<path:filename>')
+def static_files(filename):
+    return send_from_directory('../frontend', filename)
 
 # 
 # CATALOG SERVICE  →  /api/products
